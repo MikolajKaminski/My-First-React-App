@@ -24,23 +24,18 @@ class Board extends React.Component {
     }
 
     render() {
+        let boardSquares = [];
+        for(let row = 0; row < 3; row++){
+            let boardRow = [];
+            for(let col = 0; col < 3; col++){
+                boardRow.push(this.renderSquare((row * 3) + col));
+            }
+            boardSquares.push(<div className="board-row">{boardRow}</div>);
+        }
+
         return (
             <div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                {boardSquares}
             </div>
         );
     }
@@ -98,8 +93,8 @@ class Game extends React.Component {
             const chosenFieldY = Math.trunc((step.chosenField) / 3);
 
             const colRow = move ?
-                " (" + (chosenFieldX + 1) + ", " + (chosenFieldY + 1) + ")" :
-                "";
+                ' (' + (chosenFieldX + 1) + ', ' + (chosenFieldY + 1) + ')' :
+                '';
             
             return (
                 <li key={move}>
