@@ -17,6 +17,7 @@ class Board extends React.Component {
     renderSquare(i) {
         return (
             <Square
+                key={i.toString()}
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
             />
@@ -30,7 +31,7 @@ class Board extends React.Component {
             for(let col = 0; col < 3; col++){
                 boardRow.push(this.renderSquare((row * 3) + col));
             }
-            boardSquares.push(<div className="board-row">{boardRow}</div>);
+            boardSquares.push(<div key={row.toString()} className="board-row">{boardRow}</div>);
         }
 
         return (
@@ -98,7 +99,15 @@ class Game extends React.Component {
             
             return (
                 <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc + colRow}</button>
+                    <button
+                        onClick={() => this.jumpTo(move)}
+                        style={this.state.stepNumber === move ? 
+                            { fontWeight: 'bold' } : 
+                            { fontWeight: 'normal' }
+                        }
+                    >
+                        {desc + colRow}
+                    </button>
                 </li>
             );
         });
